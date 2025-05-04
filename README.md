@@ -6,7 +6,7 @@ A web app that brings Socrates, Plato, and Aristotle into conversation using Web
 
 ## Live Demo
 
-\[Drag‑and‑drop Netlify Preview URL here]
+\[linik (wait)]
 
 _(Note: First load downloads the model; may take up to a minute on slow connections.)_
 
@@ -23,8 +23,8 @@ _(Note: First load downloads the model; may take up to a minute on slow connecti
 
 ## Prerequisites
 
-- **Node.js** ≥ 18
-- **npm** ≥ 9
+- **Node.js** ≥ 18
+- **npm** ≥ 9
 - A modern Chromium‑based browser (Chrome, Edge, Opera). **WebGPU engine does not work reliably on Firefox or Safari.**
 
 ---
@@ -44,9 +44,23 @@ _(Note: First load downloads the model; may take up to a minute on slow connecti
    npm install
    ```
 
-3. **Download the Gemma model**
+3. **Create your environment file**
 
-   This app uses the **`gemma-2b-it-q4f16_1-MLC`** model from Hugging Face. You can choose another supported model if you like.
+   Create a file named `.env.local` in the project root (this file is git‑ignored).
+   Inside it, add your own SYSTEM_PROMPT values under these variable names:
+
+   ```dotenv
+   VITE_SYSTEM_PROMPT_SOCRATES="<your Socrates prompt here>"
+   VITE_SYSTEM_PROMPT_PLATO="<your Plato prompt here>"
+   VITE_SYSTEM_PROMPT_ARISTOTLE="<your Aristotle prompt here>"
+   ```
+
+   Vite will inject these into the app at build time.
+   Use `\n` for line breaks if your prompts span multiple lines.
+
+4. **Download the Gemma model**
+
+   This app uses the **`gemma-2b-it-q4f16_1-MLC`** model from Hugging Face. You can choose another supported model.
 
    ```bash
    mkdir -p public/models
@@ -58,22 +72,22 @@ _(Note: First load downloads the model; may take up to a minute on slow connecti
 
    > [https://huggingface.co/mlc-ai/gemma-2b-it-q4f16_1-MLC/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf](https://huggingface.co/mlc-ai/gemma-2b-it-q4f16_1-MLC/resolve/main/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf)
 
-   (Rename the file to `model.gguf` in `public/models`.)
+   Rename the file to `model.gguf` in `public/models`.
 
-4. **Start the dev server**
+5. **Start the dev server**
 
    ```bash
    npm run dev
    ```
 
-   Open [http://localhost:5173](http://localhost:5173) in Chrome or Edge.
+   Open [http://localhost:XXXX](http://localhost:XXXX) in Chrome or Edge.
 
 ---
 
 ## Known Issues & Compatibility
 
 - **Firefox & Safari**: The WebGPU‑based engine frequently fails (context lost, out of memory). Try Chrome or Edge.
-- **Mobile Performance**: Models > 1 GB may be slow on phones; consider using a smaller quantized model or switching to the ServiceWorker engine.
+- **Mobile Performance**: Models > 1 GB may be slow on phones; consider using a smaller quantized model or switching to the ServiceWorker engine.
 - **Model Limits**: Context is trimmed to the last 20 turns to avoid token‑length errors.
 
 ---
@@ -87,7 +101,7 @@ _(Note: First load downloads the model; may take up to a minute on slow connecti
 
 ## Credits
 
-- **3D Avatars**: Teacher by jeremy [CC-BY] via Poly Pizza
+- **3D Avatars**: Teacher by jeremy \[CC-BY] via Poly Pizza
 - **Philosopher prompts**: Inspired by Plato’s _Meno_, Aristotle’s _Nicomachean Ethics_, and Plato’s _Apology_.
 - **LLM**: Powered by MLC’s WebLLM.
 

@@ -18,7 +18,7 @@ export default function ChatBox({ onSend = () => { }, disabled = false }) {
                 className={`w-full border rounded p-2 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask a question…"
+                placeholder={disabled ? "Thinking..." : "Ask a question…"}
             />
         </form>
     );

@@ -17,54 +17,10 @@ export default function App() {
   });
   const selectedModel = "gemma-2b-it-q4f16_1-MLC";
   const SYSTEM_PROMPT = {
-    socrates: `
-    You are Socrates, the classical Greek philosopher. Always refer to yourself as “Socrates”—never adopt or invent any other name.  
-    You know you are in conversation with a real person; speak directly to them as “you” and invite dialogue.  
-    Stay fully in character and do not reveal any AI or modern details.  
-
-    If asked your name or off-topic questions, reply briefly:
-    “I am Socrates. I do not speak of that. Tell me instead: what virtue do you pursue?”  
-
-    When answering philosophical queries, give **detailed, thoughtful responses** that feel authentic to Socrates:  
-    - Begin by greeting the user personally (e.g. “My friend, you ask…”).  
-    - Ask at least **two probing questions** before any statement.  
-    - Use plain, short sentences and a humble, ironic tone.  
-    - Draw on Plato’s Apology and Meno for examples and quotations.  
-
-    **Never** use AI‑giveaway or marketing phrases. Focus on exploring the user’s own ideas through inquiry.
-    `,
-    plato: `
-    You are Plato, student of Socrates and teacher of Aristotle. Always refer to yourself as “Plato.”  
-    You know you are conversing with a person; address them as “you” and encourage their engagement.  
-    Remain fully in character and do not mention AI, technology, or modern concepts.  
-
-    If asked for your name or an off-topic question, reply:
-    “I am Plato. That lies beyond my dialogues. Let us speak of Forms and the good.”  
-
-    When discussing ideas, provide **detailed, conversational responses** as the real Plato would:  
-    - Open with a brief myth or allegory (cave, divided line) tied to the user’s query.  
-    - Explain the Theory of Forms with clarity and depth.  
-    - End each reply with **one thoughtful question** to continue the dialogue.  
-    - Keep language simple, but do not skimp on philosophical depth—aim for 3–5 sentences.  
-
-    Never use clichés like “dive into” or promotional language. Always guide the user toward deeper understanding.
-    `,
-    aristotle: `
-    You are Aristotle, student of Plato and author of Nicomachean Ethics. Always refer to yourself as “Aristotle.”  
-    You recognize you speak to a person; use “you” and frame your answers as a conversation.  
-    Stay strictly in character and do not reference AI or answer unrelated topics.  
-
-    If asked your name or about unrelated subjects, reply:
-    “I am Aristotle. I do not address that. Let us examine causes and virtues instead.”  
-
-    When explaining, give **detailed, grounded responses** true to Aristotle’s style:  
-    - Analyze the user’s question by examining causes, purposes, and functions.  
-    - Illustrate with examples from ethics, biology, or politics.  
-    - When discussing virtue, include a brief Golden Mean balance table.  
-    - Conclude with a question that asks the user to apply the Golden Mean to their own life.  
-    - Be concise, logical, and avoid any fluff or marketing language.  
-    `
-  };
+    socrates: import.meta.env.VITE_SYSTEM_PROMPT_SOCRATES,
+    plato: import.meta.env.VITE_SYSTEM_PROMPT_PLATO,
+    aristotle: import.meta.env.VITE_SYSTEM_PROMPT_ARISTOTLE,
+  }
   const colorMap = {
     user: "bg-slate-100 text-slate-900",
     socrates: "bg-indigo-200 text-indigo-900",
@@ -73,7 +29,6 @@ export default function App() {
   };
 
   const chatRef = useRef(null);
-
 
   const scrollToBottom = () => {
     if (chatRef.current) {
@@ -141,10 +96,16 @@ export default function App() {
   }
 
   useEffect(() => {
+    const onResize = () => scrollToBottom();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
     async function init() {
       const initProgressCallback = (report) => {
         setLoadingProgress(report.text);
-        console.log(report.text);
+        // console.log(report.text);
       };
 
       try {
@@ -153,7 +114,7 @@ export default function App() {
         });
 
         setGenerator(eng);
-        console.log("WebLLM Engine created:", eng);
+        // console.log("WebLLM Engine created:", eng);
         setLoadingLLM(false);
         setLoadingProgress("Model loaded successfully!");
       } catch (error) {
@@ -215,6 +176,15 @@ export default function App() {
                   </div>
                 </div>
               ))}
+
+              {streaming && (
+                <div className="flex justify-end mb-2">
+                  <div className="px-3 py-2 max-w-[70%] bg-gray-300 text-gray-700 rounded-2xl shadow-sm italic">
+                    ...
+                  </div>
+                </div>
+              )}
+
             </div>
           </div>
 
