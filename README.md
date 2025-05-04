@@ -1,5 +1,7 @@
 # The Thinkers' Table
 
+![logo (2)](https://github.com/user-attachments/assets/c1d754fc-86f5-4a23-89f3-1cdafa1dd613)
+
 A web app that brings Socrates, Plato, and Aristotle into conversation using WebLLM and 3D avatars. Built with React, Vite, Tailwind CSS, and the MLC WebLLM engine.
 
 ---
