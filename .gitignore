@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+*.tmp
+.env*
+!.env.example
+public/tinyllama/
+public/*.glb
+.DS_Store
