@@ -1,4 +1,3 @@
-# Logs
 logs
 *.log
 npm-debug.log*
@@ -11,8 +10,6 @@ node_modules
 dist
 dist-ssr
 *.local
-
-# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -27,6 +24,6 @@ dist-ssr
 .env*
 !.env.example
 public/tinyllama/
-public/*.glb
+# public/*.glb
 .DS_Store
 public/tinyllama/
