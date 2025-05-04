@@ -9,6 +9,7 @@ export default function App() {
   const [generator, setGenerator] = useState(null);
   const [loadingLLM, setLoadingLLM] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState("");
+  const [streaming, setStreaming] = useState(false);
   const [convo, setConvo] = useState({
     socrates: [],
     plato: [],
@@ -22,6 +23,7 @@ export default function App() {
   };
 
   function handleSend(msg) {
+    setStreaming(true);
     let updatedMsg = [];
     setConvo(prev => {
       updatedMsg = [
@@ -42,6 +44,7 @@ export default function App() {
       const reply = await generator.chat.completions.create({
         messages,
       });
+      setStreaming(false);
       console.log(reply.choices[0].message)
     }
     replies();
@@ -112,7 +115,7 @@ export default function App() {
           </Canvas>
         </div>
         <div>
-          <ChatBox onSend={handleSend} />
+          <ChatBox disabled={streaming} onSend={handleSend} />
         </div>
       </div>
     </>

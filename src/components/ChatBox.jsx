@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function ChatBox({ onSend = () => { } }) {
     const [input, setInput] = useState("");
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!input.trim()) return;
