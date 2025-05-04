@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ChatBox({ onSend = () => { } }) {
+export default function ChatBox({ onSend = () => { }, disabled = false }) {
     const [input, setInput] = useState("");
 
 
@@ -14,7 +14,8 @@ export default function ChatBox({ onSend = () => { } }) {
     return (
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto my-4">
             <input
-                className="w-full border rounded p-2"
+                disabled={disabled}
+                className={`w-full border rounded p-2 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question…"
