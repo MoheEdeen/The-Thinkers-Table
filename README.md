@@ -8,7 +8,7 @@ A web app that brings Socrates, Plato, and Aristotle into conversation using Web
 
 ## Live Demo
 
-\[linik (wait)]
+\[https://the-thinking-table.netlify.app/]
 
 _(Note: First load downloads the model; may take up to a minute on slow connections.)_
 
