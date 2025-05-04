@@ -29,3 +29,4 @@ dist-ssr
 public/tinyllama/
 public/*.glb
 .DS_Store
+public/tinyllama/
