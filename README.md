@@ -14,6 +14,31 @@ _(Note: First load downloads the model; may take up to a minute on slow connecti
 
 ---
 
+## **Important: Enable WebGPU in Chrome**
+
+To run the app (locally or on the demo), **you must ensure WebGPU is enabled and hardware-accelerated**:
+
+1. **Check GPU status:**
+   - Visit: `chrome://gpu`
+   - Look under **Graphics Feature Status**.
+   - Confirm that **WebGPU** says *Hardware accelerated*.
+   - ![image](https://github.com/user-attachments/assets/4da8dd29-370e-4736-beb7-2d2fb9676eb0)
+
+
+2. **If NOT hardware accelerated:**
+   - ![image](https://github.com/user-attachments/assets/849c6c6a-60c4-4649-b932-ab40544d438d)
+   - Go to: `chrome://settings/system`
+   - Enable:
+     > **☑️ Use graphics acceleration when available**
+   - Relaunch Chrome when prompted.
+
+3. **Recheck:**
+   - Visit `chrome://gpu` again to confirm WebGPU is now hardware-accelerated.
+   - ![image](https://github.com/user-attachments/assets/4da8dd29-370e-4736-beb7-2d2fb9676eb0)
+
+👉 Without GPU acceleration, the app will fail to load the model or crash unexpectedly.
+
+---
 ## Features
 
 - **Three Philosophers**: Chat with Socrates, Plato, or Aristotle, each strictly in character.
